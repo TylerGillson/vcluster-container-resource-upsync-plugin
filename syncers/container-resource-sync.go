@@ -81,41 +81,42 @@ func (s *containerResourceSyncer) updateContainerResources(pObj, vObj *corev1.Po
 
 	b := &monotonicBool{}
 	for i, c := range pObj.Spec.Containers {
-		for _, resource := range []string{"limits", "requests"} {
-			cpu := fmt.Sprintf("hostCluster.%s.%s.cpu", c.Name, resource)
-			memory := fmt.Sprintf("hostCluster.%s.%s.memory", c.Name, resource)
-			storage := fmt.Sprintf("hostCluster.%s.%s.storage", c.Name, resource)
-			ephemeralStorage := fmt.Sprintf("hostCluster.%s.%s.ephemeral-storage", c.Name, resource)
+		limits := vObj.Spec.Containers[i].Resources.Limits
+		cpu := fmt.Sprintf("hostCluster.limits.%s.cpu", c.Name)
+		memory := fmt.Sprintf("hostCluster.limits.%s.memory", c.Name)
+		storage := fmt.Sprintf("hostCluster.limits.%s.storage", c.Name)
+		ephemeralStorage := fmt.Sprintf("hostCluster.limits.%s.ephemeral-storage", c.Name)
 
-			if resource == "limits" {
-				noLimits := vObj.Spec.Containers[i].Resources.Limits == nil
-				if noLimits || vObj.Spec.Containers[i].Resources.Limits.Cpu() == nil {
-					updateMap(updated.Annotations, cpu, c.Resources.Limits.Cpu().String(), b)
-				}
-				if noLimits || vObj.Spec.Containers[i].Resources.Limits.Memory() == nil {
-					updateMap(updated.Annotations, memory, c.Resources.Limits.Memory().String(), b)
-				}
-				if noLimits || vObj.Spec.Containers[i].Resources.Limits.Storage() == nil {
-					updateMap(updated.Annotations, storage, c.Resources.Limits.Storage().String(), b)
-				}
-				if noLimits || vObj.Spec.Containers[i].Resources.Limits.StorageEphemeral() == nil {
-					updateMap(updated.Annotations, ephemeralStorage, c.Resources.Limits.StorageEphemeral().String(), b)
-				}
-			} else { // requests
-				noRequests := vObj.Spec.Containers[i].Resources.Requests == nil
-				if noRequests || vObj.Spec.Containers[i].Resources.Requests.Cpu() == nil {
-					updateMap(updated.Annotations, cpu, c.Resources.Requests.Cpu().String(), b)
-				}
-				if noRequests || vObj.Spec.Containers[i].Resources.Requests.Memory() == nil {
-					updateMap(updated.Annotations, memory, c.Resources.Requests.Memory().String(), b)
-				}
-				if noRequests || vObj.Spec.Containers[i].Resources.Requests.Storage() == nil {
-					updateMap(updated.Annotations, storage, c.Resources.Requests.Storage().String(), b)
-				}
-				if noRequests || vObj.Spec.Containers[i].Resources.Requests.StorageEphemeral() == nil {
-					updateMap(updated.Annotations, ephemeralStorage, c.Resources.Requests.StorageEphemeral().String(), b)
-				}
-			}
+		if limits == nil || limits.Cpu() == nil || limits.Cpu().IsZero() {
+			updateMap(updated.Annotations, cpu, c.Resources.Limits.Cpu().String(), b)
+		}
+		if limits == nil || limits.Memory() == nil || limits.Memory().IsZero() {
+			updateMap(updated.Annotations, memory, c.Resources.Limits.Memory().String(), b)
+		}
+		if limits == nil || limits.Storage() == nil || limits.Storage().IsZero() {
+			updateMap(updated.Annotations, storage, c.Resources.Limits.Storage().String(), b)
+		}
+		if limits == nil || limits.StorageEphemeral() == nil || limits.StorageEphemeral().IsZero() {
+			updateMap(updated.Annotations, ephemeralStorage, c.Resources.Limits.StorageEphemeral().String(), b)
+		}
+
+		requests := vObj.Spec.Containers[i].Resources.Requests
+		cpu = fmt.Sprintf("hostCluster.requests.%s.cpu", c.Name)
+		memory = fmt.Sprintf("hostCluster.requests.%s.memory", c.Name)
+		storage = fmt.Sprintf("hostCluster.requests.%s.storage", c.Name)
+		ephemeralStorage = fmt.Sprintf("hostCluster.requests.%s.ephemeral-storage", c.Name)
+
+		if requests == nil || requests.Cpu() == nil || requests.Cpu().IsZero() {
+			updateMap(updated.Annotations, cpu, c.Resources.Requests.Cpu().String(), b)
+		}
+		if requests == nil || requests.Memory() == nil || requests.Memory().IsZero() {
+			updateMap(updated.Annotations, memory, c.Resources.Requests.Memory().String(), b)
+		}
+		if requests == nil || requests.Storage() == nil || requests.Storage().IsZero() {
+			updateMap(updated.Annotations, storage, c.Resources.Requests.Storage().String(), b)
+		}
+		if requests == nil || requests.StorageEphemeral() == nil || requests.StorageEphemeral().IsZero() {
+			updateMap(updated.Annotations, ephemeralStorage, c.Resources.Requests.StorageEphemeral().String(), b)
 		}
 	}
 
