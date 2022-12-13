@@ -1,0 +1,63 @@
+version: v2beta1
+name: container-resource-upsync
+
+vars:
+  PLUGIN_IMAGE: tylergillson/vcluster-container-resource-upsync-plugin
+  K3S_IMAGE: rancher/k3s:v1.23.5-k3s1
+  SERVICE_CIDR: $( vcluster get service-cidr )
+  DEVSPACE_FLAGS: "-n vcluster"
+
+images:
+  vcluster:
+    image: ${PLUGIN_IMAGE}
+    dockerfile: ./Dockerfile.dev
+    rebuildStrategy: ignoreContextChanges
+
+deployments:
+  vcluster:
+    helm:
+      chart:
+        name: vcluster
+        repo: https://charts.loft.sh
+        version: 0.13.0
+      valuesFiles:
+        - plugin.yaml
+      values:
+        plugin:
+          container-resources-sync:
+            image: ${PLUGIN_IMAGE}
+        serviceCIDR: ${SERVICE_CIDR}
+        serviceAccount:
+          create: false
+          name: default
+        vcluster:
+          image: ${K3S_IMAGE}
+        rbac:
+          clusterRole:
+            create: true
+          role:
+            extended: true
+        isolation:
+          enabled: true
+          limitRange:
+            default:
+              cpu: 10000m
+              ephemeral-storage: 10Gi
+              memory: 20Gi
+            defaultRequest:
+              cpu: 10m
+              ephemeral-storage: 0
+              memory: 64Mi
+            enabled: true
+          resourceQuota:
+            enabled: false
+
+dev:
+  vcluster:
+    imageSelector: ${PLUGIN_IMAGE}
+    terminal:
+      command: ./devspace_start.sh
+    ports:
+    - port: 2346:2345
+    sync:
+    - path: .:/vcluster
