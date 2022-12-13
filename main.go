@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/TylerGillson/vcluster-container-resource-upsync/syncers"
 	"github.com/loft-sh/vcluster-sdk/plugin"
-	"github.com/spectrocloud/vcluster-container-resource-upsync/syncers"
 )
 
 func main() {

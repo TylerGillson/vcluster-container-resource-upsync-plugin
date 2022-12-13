@@ -7,17 +7,16 @@ VERSION_SUFFIX ?= -dev
 PROD_VERSION ?= 2.6.0${VERSION_SUFFIX}
 PROD_BUILD_ID ?= $(shell date +%Y%m%d.%H%M)
 
-BIN_DIR ?= ./bin
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
 GOPATH ?= $(shell go env GOPATH)
 
 IMG_TAG ?= "latest"
-IMG_NAME ?= "gcr.io/spectro-common-dev/${USER}/vcluster-container-resource-upsync-plugin:${IMG_TAG}"
+IMG_NAME ?= "tylergillson/vcluster-container-resource-upsync-plugin:${IMG_TAG}"
 
 GOLANGCI_VERSION ?= 1.46.2
 
-# get all the coverpkg for integration test report
+BIN_DIR ?= ./bin
 COVER_DIR=_build/cov
 COVER_PKGS=$(shell go list ./... | grep -vE 'tests|api|fake|cmd|hack|config|test|config' | tr "\n" ",")
 
@@ -63,7 +62,7 @@ test-unit: ## Run unit tests
 	rm -f $(COVER_DIR)/*
 	go test -v -covermode=count -coverprofile=$(COVER_DIR)/unit.out ./...
 
-test: test-unit gocovmerge gocover ## Run unit tests, integration test
+test: test-unit gocovmerge gocover ## Run unit tests and generate a test report
 	$(GOCOVMERGE) $(COVER_DIR)/*.out > $(COVER_DIR)/coverage.out
 	go tool cover -func=$(COVER_DIR)/coverage.out -o $(COVER_DIR)/cover.func
 	go tool cover -html=$(COVER_DIR)/coverage.out -o $(COVER_DIR)/cover.html
