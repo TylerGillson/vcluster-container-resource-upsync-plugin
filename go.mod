@@ -3,7 +3,7 @@ module github.com/TylerGillson/vcluster-container-resource-upsync
 go 1.19
 
 require (
-	github.com/loft-sh/vcluster-sdk v0.4.0
+	github.com/TylerGillson/vcluster-sdk v0.4.2
 	k8s.io/api v0.26.0
 	sigs.k8s.io/controller-runtime v0.13.1-0.20221213002533-ca4b4def4fb3
 )
