@@ -1,7 +1,6 @@
 ## Container Resource Upsync Plugin
 
-The Spectro Cloud container resource upsync plugin mutates container resource specifications in vcluster pods to match the host cluster.
-This is to account for the scenario where a Limit Range in the host cluster mutates the physical pod, but the changes are not reflected in the virtual pod.
+The container resource upsync plugin annotates vcluster pods with any container resource constraints found on the host cluster, but not the virtual cluster. This is to account for the scenario where a Limit Range in the host cluster mutates the physical pod, but the changes are not reflected in the virtual pod.
 
 For more information how to develop plugins in vcluster, please refer to the [official vcluster docs](https://www.vcluster.com/docs/plugins/overview).
 
