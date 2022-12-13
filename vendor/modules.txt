@@ -5,6 +5,19 @@ github.com/Azure/go-ansiterm/winterm
 # github.com/MakeNowJust/heredoc v1.0.0
 ## explicit; go 1.12
 github.com/MakeNowJust/heredoc
+# github.com/TylerGillson/vcluster-sdk v0.4.2
+## explicit; go 1.17
+github.com/TylerGillson/vcluster-sdk/applier
+github.com/TylerGillson/vcluster-sdk/clienthelper
+github.com/TylerGillson/vcluster-sdk/hook
+github.com/TylerGillson/vcluster-sdk/log
+github.com/TylerGillson/vcluster-sdk/plugin
+github.com/TylerGillson/vcluster-sdk/plugin/remote
+github.com/TylerGillson/vcluster-sdk/syncer
+github.com/TylerGillson/vcluster-sdk/syncer/context
+github.com/TylerGillson/vcluster-sdk/syncer/translator
+github.com/TylerGillson/vcluster-sdk/translate
+github.com/TylerGillson/vcluster-sdk/translate/util
 # github.com/beorn7/perks v1.0.1
 ## explicit; go 1.11
 github.com/beorn7/perks/quantile
@@ -120,19 +133,6 @@ github.com/json-iterator/go
 # github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de
 ## explicit
 github.com/liggitt/tabwriter
-# github.com/loft-sh/vcluster-sdk v0.4.0
-## explicit; go 1.17
-github.com/loft-sh/vcluster-sdk/applier
-github.com/loft-sh/vcluster-sdk/clienthelper
-github.com/loft-sh/vcluster-sdk/hook
-github.com/loft-sh/vcluster-sdk/log
-github.com/loft-sh/vcluster-sdk/plugin
-github.com/loft-sh/vcluster-sdk/plugin/remote
-github.com/loft-sh/vcluster-sdk/syncer
-github.com/loft-sh/vcluster-sdk/syncer/context
-github.com/loft-sh/vcluster-sdk/syncer/translator
-github.com/loft-sh/vcluster-sdk/translate
-github.com/loft-sh/vcluster-sdk/translate/util
 # github.com/mailru/easyjson v0.7.6
 ## explicit; go 1.12
 github.com/mailru/easyjson/buffer

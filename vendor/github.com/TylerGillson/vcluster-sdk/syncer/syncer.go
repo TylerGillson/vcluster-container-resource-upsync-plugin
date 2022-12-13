@@ -3,8 +3,8 @@ package syncer
 import (
 	"context"
 
-	"github.com/loft-sh/vcluster-sdk/log"
-	synccontext "github.com/loft-sh/vcluster-sdk/syncer/context"
+	"github.com/TylerGillson/vcluster-sdk/log"
+	synccontext "github.com/TylerGillson/vcluster-sdk/syncer/context"
 
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"

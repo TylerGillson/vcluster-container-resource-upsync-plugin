@@ -1,7 +1,7 @@
 package translator
 
 import (
-	"github.com/loft-sh/vcluster-sdk/syncer/context"
+	"github.com/TylerGillson/vcluster-sdk/syncer/context"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/tools/record"
 	ctrl "sigs.k8s.io/controller-runtime"

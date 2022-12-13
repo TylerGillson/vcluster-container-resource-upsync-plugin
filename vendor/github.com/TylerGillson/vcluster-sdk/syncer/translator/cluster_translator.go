@@ -4,10 +4,10 @@ import (
 	context2 "context"
 	"crypto/sha256"
 	"encoding/hex"
-	"github.com/loft-sh/vcluster-sdk/clienthelper"
+	"github.com/TylerGillson/vcluster-sdk/clienthelper"
 
-	"github.com/loft-sh/vcluster-sdk/syncer/context"
-	"github.com/loft-sh/vcluster-sdk/translate"
+	"github.com/TylerGillson/vcluster-sdk/syncer/context"
+	"github.com/TylerGillson/vcluster-sdk/translate"
 	"k8s.io/apimachinery/pkg/api/equality"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"

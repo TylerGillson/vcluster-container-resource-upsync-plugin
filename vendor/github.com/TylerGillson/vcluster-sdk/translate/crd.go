@@ -3,17 +3,18 @@ package translate
 import (
 	"context"
 	"fmt"
+	"math"
+	"time"
+
 	"github.com/pkg/errors"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	apiextensionsv1clientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	"math"
-	"time"
 
-	"github.com/loft-sh/vcluster-sdk/applier"
-	"github.com/loft-sh/vcluster-sdk/log"
+	"github.com/TylerGillson/vcluster-sdk/applier"
+	"github.com/TylerGillson/vcluster-sdk/log"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/discovery"
 	"k8s.io/client-go/rest"
@@ -52,6 +53,7 @@ func EnsureCRDFromPhysicalCluster(ctx context.Context, pConfig *rest.Config, vCo
 	crdDefinition.ResourceVersion = ""
 	crdDefinition.ManagedFields = nil
 	crdDefinition.OwnerReferences = nil
+	crdDefinition.Spec.PreserveUnknownFields = false
 	crdDefinition.Status = apiextensionsv1.CustomResourceDefinitionStatus{}
 	vClient, err := apiextensionsv1clientset.NewForConfig(vConfig)
 	if err != nil {

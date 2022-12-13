@@ -1,8 +1,8 @@
 package util
 
 import (
-	"github.com/loft-sh/vcluster-sdk/syncer/context"
-	"github.com/loft-sh/vcluster-sdk/translate"
+	"github.com/TylerGillson/vcluster-sdk/syncer/context"
+	"github.com/TylerGillson/vcluster-sdk/translate"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"

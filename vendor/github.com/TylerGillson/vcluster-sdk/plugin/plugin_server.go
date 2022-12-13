@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/loft-sh/vcluster-sdk/hook"
-	"github.com/loft-sh/vcluster-sdk/plugin/remote"
+	"github.com/TylerGillson/vcluster-sdk/hook"
+	"github.com/TylerGillson/vcluster-sdk/plugin/remote"
 )
 
 type pluginServer struct {

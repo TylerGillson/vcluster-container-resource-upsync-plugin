@@ -1,8 +1,8 @@
 package syncer
 
 import (
-	"github.com/loft-sh/vcluster-sdk/syncer/context"
-	"github.com/loft-sh/vcluster-sdk/syncer/translator"
+	"github.com/TylerGillson/vcluster-sdk/syncer/context"
+	"github.com/TylerGillson/vcluster-sdk/syncer/translator"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
